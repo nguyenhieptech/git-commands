@@ -24,6 +24,7 @@
 - [Push code to a remote repository](#push-code-to-a-remote-repository)
 - [Clone the project from remote repository to local](#clone-the-project-from-remote-repository-to-local)
 - [Pull code from remote repository](#pull-code-from-remote-repository)
+- [Rename files and folders](#rename-files-and-folders)
 - [Branching and Merging](#branching-and-merging)
 - [Stashing and Cleaning](#stashing-and-cleaning)
 - [See commits and history](#see-commits-and-history)
@@ -332,6 +333,26 @@ git clone https://github.com/username/repo-name
 git pull origin main
 git pull origin dev
 git pull origin feature/one
+```
+
+## Rename files and folders
+
+- https://makolyte.com/how-to-change-the-casing-of-a-filename-when-using-git-on-windows/
+
+- When you rename a file by changing its casing on Windows (ex: movie.cs -> Movie.cs), git will ignore the change. This behavior is controlled by the git core.ignorecase setting, which is true by default (at least on Windows). This is why it ignores filename casing changes.
+- https://stackoverflow.com/questions/60970855/git-folder-name-change-locally-not-pushing-to-remote
+
+- Rename files
+
+```bash
+git mv Colors.js colors.js
+```
+
+- Rename folders
+
+```bash
+git mv Services temp    # we need to do it in 2 steps
+git mv temp services
 ```
 
 ## Branching and Merging
