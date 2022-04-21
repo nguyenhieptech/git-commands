@@ -113,7 +113,7 @@ git help config
 - **From Programming with Mosh Git course:** All these configuration settings are stored in a text file, we can edit that file using our default editor, this case VS code. Without this config above, we normally use Vim terminal to edit these configuration. git config --global -e.
 
 ```bash
-git config global core.editor 'code --wait'
+git config --global core.editor 'code --wait'
 ```
 
 - For Windows
