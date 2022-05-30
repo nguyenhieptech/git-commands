@@ -10,6 +10,8 @@
 
 ---
 
+- [Config Local Users](#config-local-user)
+- [Set the username/email for a specific repository](#set-the-usernameemail-for-a-specific-repository)
 - [Initialize a git folder in a local repository](#initialize-a-git-folder-in-a-local-repository)
 - [Check working status](#check-working-status)
 - [Add files to staging area](#add-files-to-staging-area)
@@ -102,6 +104,15 @@ git --version
 ```bash
 git config --global user.name 'Your Name'
 git config --global user.email 'example@gmail.com'
+```
+
+## Set the username/email for a specific repository
+
+https://smarterco.de/set-the-username-and-email-in-git-globally-and-per-project/
+
+```bash
+git config user.name "Your project specific name"
+git config user.email "your@project-specific-email.com"
 ```
 
 ```bash
@@ -269,7 +280,11 @@ git cherry-pick 1b818d3     # copy the hash of the last commit, in this case 1b8
   git clean -df    # -d: untracked directories, -f: untracked files
   ```
 
-- **My own notes**: If you want the same function in VS Code (Source Control when Ctrl + B), use `git reset hard --HEAD`
+- **My own notes**: If you want the same function in VS Code (Source Control when Ctrl + B), use
+
+```bash
+git reset --hard HEAD
+```
 
 - [15:01] `git reflog`
 
@@ -315,6 +330,7 @@ git remote
 git push origin main
 git push -u origin main       # u: coordinates the two branches (local and on server)
 git push -u origin develop
+git push origin feature/login
 ```
 
 ## Clone the project from remote repository to local
@@ -323,6 +339,7 @@ git push -u origin develop
 
 ```bash
 git clone https://github.com/username/repo-name
+git clone https://github.com/microsoft/vscode
 ```
 
 ## Pull code from remote repository
@@ -384,15 +401,15 @@ git push origin --delete feature/login
 - Shorthand for create a new branch and switch to that new branch
 
 ```bash
-git switch -b feature/signup
-git checkout -b feature/signup
+git switch -b feature/register
+git checkout -b feature/register
 ```
 
 - Delete a branch
 
 ```bash
-git branch -d feature/signup    # only work when we've merged the branch
-git branch -D feature/signup    # delete the branch without needing to merge
+git branch -d feature/register    # only work when we've merged the branch
+git branch -D feature/register    # delete the branch without needing to merge
 ```
 
 - Change between branches
