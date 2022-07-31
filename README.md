@@ -6,7 +6,8 @@
 
 - [Bash shortcuts for Maximum Productivity](#bash-shortcuts-for-maximum-productivity)
 - [Understanding the Github flow](#understanding-the-github-flow)
-- [Git workflow in real world projects (Branching workflow)](#git-workflow-in-real-world-projects-branching-workflow)
+- [Git Branching workflow with Rebase (recommend)](#git-branching-workflow-with-rebase-recommend)
+- [Git Branching workflow in real world projects (old)](#git-branching-workflow-in-real-world-projects-old)
 
 ---
 
@@ -32,7 +33,6 @@
 - [See commits and history](#see-commits-and-history)
 - [Alias](#alias)
 - [Squashing: combining multiple commits into one, for a cleaner git history](#squashing-combining-multiple-commits-into-one-for-a-cleaner-git-history)
-- [Rebase](#rebase)
 
 ## Bash Shortcuts For Maximum Productivity
 
@@ -57,7 +57,69 @@ cd D:\Studying\Programming\react-projects-doing-for-learning\
 
 https://guides.github.com/introduction/flow/
 
-## Git workflow in real world projects (Branching workflow)
+## Git Branching workflow with Rebase (recommend)
+
+- This is a work flow I would recommend **(31/07/2022)**
+
+- Create a new branch in local, example `features/login`
+- Work on that branch in local, and commit changes in local.
+- Switch to `develop`/`dev` branch, pull code from remote repo (Github, etc).
+- Switch to your feature branch, example `features/login`.
+- Rebase.
+- Resolve conflicts.
+- Push that code in remote repo (Github, etc).
+- Create pull request/merge request from new branch to `develop` / `dev` / `main` remote repository, depends on your team.
+- Merge code from that branch to `main`/`dev` branch in remote repo (somebody _might_ check before merging code, leave comment, etc).
+- After that if everything works fine, somebody will merge that `feature/login` branch to `develop` / `dev` / `main` branch on remote repo, depends on your team.
+- Pull code from remote to local.
+
+Git rebase basics
+https://www.youtube.com/watch?v=gkGZzd9c4ow
+
+- **The golden rule (from Youtube comment): merge to master/main branch and rebase the feature branches.**
+
+- Real example flow:
+
+```bash
+git branch feature/login            # create a new feature branch in local, mostly from `develop` or `dev` branch
+git add .                           # add some files and make some commits
+
+# remember to divide commits - "each commit does one thing". This is just an example:
+
+# git add src/screen/index.tsx
+# git commit -m "Add Login page"
+
+# git add src/screen/style.ts
+# git commit -m "Add styles"
+
+# git add src/hooks/useLogin.ts
+# git commit -m "Add login logic custom hook"
+
+# or something else (depend on your team)
+# git add src/screen/index.tsx src/screen/style.ts src/hooks/useLogin.ts
+# git commit -m "Add login feature"
+
+git commit -m 'Add login feature'
+git switch dev                      # or git checkout dev
+git pull origin dev
+git switch feature/login
+git rebase dev                      # rebase
+
+# resolve conflicts if we have them using `git rebase --continue`
+# after rebasing successfully
+
+git push origin feature/login
+
+# create a pull request
+# somebody will check the pull request
+# don't forget to squash commits when making pull request
+# after some time, pull request has been merged
+
+git switch dev                      # or main branch, depend on your team
+git pull origin dev
+```
+
+## Git Branching workflow in real world projects (old)
 
 - Create a new branch in local.
 - Work on that branch in local, and commit changes in local.
@@ -542,12 +604,4 @@ git switch main                   # or git checkout main
 git pull origin main
 git merge --squash feature/login
 git commit -m 'your comment'
-```
-
-## Rebase
-
-When HEAD pointer is on feature/...branches, feature/login or feature/cart for example, run
-
-```bash
-git rebase main
 ```
